@@ -1,0 +1,129 @@
+{% extends "../layout.html" %}
+
+{% block title %}
+    RecipeLib - Admin: Nova receita
+{% endblock title %}
+
+{% block body %}
+    <main>
+        <form action="{% url 'create' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="recipe-header-admin">
+                <h2>Criando receita</h2>
+                
+                <div class="admin-buttons">
+                    <button class="admin-button-1" type="submit">Salvar receita</button>
+                </div>
+            </div>
+
+            <div class="item">
+                <h4>Imagens da receita</h4>
+                <div class="image-box">
+                    <div id="photos-upload">
+                        <input 
+                            id="photos-input"
+                            type="file" 
+                            name="photos" 
+                            multiple
+                            accept="image/*"
+                            onchange="PhotosUpload.handleFileInput(event)"
+                            style="display:none;"
+                            required
+                        >
+                        <input 
+                            type="button" 
+                            class="photos-input"
+                            onclick="document.getElementById('photos-input').click()"
+                        >
+                        <i class="material-icons">add</i>
+                    </div>
+
+                    <div id="photos-preview">
+                        {% if files %}
+                            {% for image in files %}
+                                <div class="photo" id="{{ image.id }}">
+                                    <img src="{{ image.src }}" alt="{{ image.name }}">
+                                    <i 
+                                        class="material-icons"
+                                        onclick="PhotosUpload.removeOldPhoto(event)"
+                                        >close</i>
+                                </div>
+                            {% endfor %}
+                            <input 
+                                type="hidden" 
+                                name="removed_files"
+                            >
+                        {% endif %}
+                    </div> 
+                </div>
+            </div>
+
+            <div class="item">
+                <h4>Título</h4>
+                <div>
+                    <input
+                        autofocus    
+                        type="text"
+                        name="title"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="item">
+                <h4>Chef</h4>
+                <div>
+                    <input
+                        type="text"
+                        name="chef"
+                        placeholder="Nome do criador"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="item">
+                <h4>Ingredientes</h4>
+                <div id="ingredients">
+                    <textarea 
+                        name="ingredients"
+                        class="information"
+                        cols="10"
+                        rows="2"
+                        placeholder="Todos os ingredientes"
+                        required
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="item">
+                <h4>Modo de preparo</h4>
+                <div id="steps">
+                    <textarea 
+                        name="preparation"
+                        class="information"
+                        cols="10"
+                        rows="2"
+                        placeholder="Todos os passos"
+                        required
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="item">
+                <h4>Informações adicionais</h4>
+                <div>
+                    <textarea 
+                        name="information"
+                        class="information"
+                        cols="10"
+                        rows="2"
+                        required
+                    ></textarea>
+                </div>
+            </div>
+
+        </form>    
+    </main>
+{% endblock body %}

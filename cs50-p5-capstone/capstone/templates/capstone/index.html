@@ -1,0 +1,36 @@
+{% extends "capstone/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <main>
+        <div class="bloco-inicial">
+            <div class="texto-inicial">
+                <h1>As melhores receitas</h1>
+                <p>Aprenda a construir os melhores pratos com receitas criadas por profissionais do mundo inteiro.</p>
+            </div>
+            <div class="desenho-chef">
+                <img src="{% static 'capstone/assets/chef.png' %}" alt="desenho-chef">
+            </div>
+        </div>
+    </main>
+
+    <section>
+        <h2>Mais recentes</h2>
+        <div class="grid-receitas">
+            {% for recipe in recipes %}
+                <div class="receita" id="{{ recipe.id }}">
+                    {% for file in files %}
+                        {% if file.recipe == recipe %}
+                            <img src="{{ file.path }}" alt="{{ recipe.title }}">
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="texto-receita">
+                        <h3>{{ recipe.title }}</h3>
+                        <p>por {{ recipe.chef }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,47 @@
+.body {
+    padding: 16px 8px;
+}
+
+.post-item {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    padding: 20px;
+    margin-bottom: 8px;
+}
+
+.post-item form button, .btn.btn-primary {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.post-item a.author {
+    color: #212529;
+}
+
+.post-item span.timestamp {
+    display: block;
+    color: grey;
+}
+
+.post-item .likes {
+    display: flex;
+    align-items: center;
+}
+
+.post-item .likes span:first-child {
+    margin-right: 2px;
+}
+
+.post-item .likes span:nth-child(2) {
+    margin-right: 6px;
+}   
+
+.post-item .likes .material-icons.redheart { 
+    color: red;
+    font-size: 18px
+}
+
+a.disabled {
+    pointer-events: none;
+    color: grey;
+}

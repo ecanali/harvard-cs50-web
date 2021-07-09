@@ -1,0 +1,53 @@
+{% extends "capstone/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ recipe.title }}
+{% endblock title %}
+
+{% block body %}
+    <main>
+        <div class="gallery">
+            <div class="highlight">
+                <img 
+                    src="{{ first_file.path }}" 
+                    alt="{{ first_file.name }}"
+                >
+            </div>
+
+            <div class="gallery-preview">
+                {% for file in files %}
+                    {% if file.recipe == recipe %}
+                        <img 
+                            src="{{ file.path }}" 
+                            alt="{{ file.name }}"
+                            {% if forloop.first %}
+                                class="active"
+                            {% endif %}
+                            onclick="ImageGallery.setImage(event)"
+                        >
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="recipe-title">
+            <h1>{{ recipe.title }}</h1>
+            <h3>por {{ recipe.chef }}</h3>
+        </div>
+        <div class="recipe-info">
+            <h2>Ingredientes <span class="button">ESCONDER</span></h2>
+            <div class="recipe-hide-show">
+                <p>{{ recipe.ingredients }}</p>
+            </div>
+            <h2>Modo de preparo <span class="button">MOSTRAR</span></h2>
+            <div class="recipe-hide-show hidden">
+                <p>{{ recipe.preparation }}</p>
+            </div>
+            <h2>Informações adicionais <span class="button">ESCONDER</span></h2>
+            <div class="recipe-hide-show">
+                <p>{{ recipe.information }}</p>
+            </div>
+        </div>
+    </main>
+{% endblock body %}

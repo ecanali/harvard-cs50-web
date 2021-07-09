@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}RecipeLib{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link href="{% static 'capstone/styles.css' %}" rel="stylesheet">
+        <link href="{% static 'capstone/assets/favicon.ico' %}" rel="icon">
+    </head>
+    <body>
+
+        <div class="content">
+            <header>
+                <nav>
+                    <a href="{% url 'index' %}"><img src="{% static 'capstone/assets/recipelib-logo.png' %}" alt="logo-recipelib"></a>
+                    <a href="{% url 'about' %}" class="sublinhado">Sobre</a>
+                    <a href="{% url 'recipes' %}" class="sublinhado">Receitas</a>
+                    <a href="{% url 'myrecipes' %}" class="sublinhado">Admin</a>
+
+                    <form action="{% url 'filter' %}" method="GET" class="home-filter">
+                        <input 
+                            type="text"
+                            name="filter"
+                            placeholder="Buscar uma receita"
+                        >
+                        <button type="submit">Buscar</button>
+                    </form>
+                </nav>
+            </header>
+
+            {% block body %}
+            {% endblock %}
+
+        </div>
+
+        <footer>
+            <div class="rodape">
+                <p>Todos direitos reservados, receitas RecipeLib.</p>
+            </div>
+        </footer>
+
+        <script src="{% static 'capstone/site.js' %}"></script>
+
+    </body>
+</html>

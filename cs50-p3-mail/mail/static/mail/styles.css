@@ -1,0 +1,37 @@
+.container {
+    margin: 16px auto;
+}
+
+textarea {
+    min-height: 400px;
+}
+
+div.container div#emails-view > div {
+    border: 1px solid rgba(143, 143, 143, 0.399);
+    display: flex;
+
+    padding: 6px;
+    margin-bottom: 2px;
+}
+
+div#emails-view > div div:first-child {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+div#emails-view > div div:last-child {
+    margin: 0 0 0 auto;
+    color: grey;
+}
+
+.read-email {
+    background: rgba(242,245,245,0.8);
+}
+
+#reply {
+    margin-right: 4px;
+}
+
+#compose-submit {
+    margin-top: 16px;
+}

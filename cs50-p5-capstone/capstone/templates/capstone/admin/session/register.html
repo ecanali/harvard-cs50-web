@@ -1,0 +1,81 @@
+{% extends "../layout.html" %}
+
+{% block title %}
+    RecipeLib - Registro
+{% endblock title %}
+
+{% block body %}
+    <main>
+        {% if message %}
+            <div style="color:red;margin-bottom:10px;">{{ message }}</div>
+        {% endif %}
+
+        <form action="{% url 'register' %}" method="POST" class="login-form">
+            {% csrf_token %}
+
+            <div class="recipe-header-admin">
+                <h2>Nova conta</h2>
+            </div>
+
+            <div class="item">
+                <h4>Usuário</h4>
+                <div>
+                    <input 
+                        autofocus 
+                        type="text" 
+                        name="username"
+                        placeholder="Username"
+                    >
+                </div>
+            </div>
+            
+            <div class="item">
+                <h4>Email</h4>
+                <div class="input">
+                    <input
+                        type="email" 
+                        name="email" 
+                        placeholder="Email Address"
+                    >
+                </div>
+            </div>
+
+            <div class="item">
+                <h4>Senha</h4>
+                <div class="input">
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                    >
+                </div>
+            </div>
+
+            <div class="item">
+                <h4>Confirmar senha</h4>
+                <div class="input">
+                    <input
+                        type="password"
+                        name="confirmation"
+                        placeholder="Confirm Password"
+                    >
+                </div>
+            </div>
+            
+            <div class="login-fields">
+                <a href="{% url 'login' %}">Já tem uma conta?</a>
+
+                <div class="admin-buttons">
+                    <button class="admin-button-1" type="submit">Registrar</button>
+                </div>
+            </div>
+
+            <input 
+                type="hidden" 
+                name="id" 
+                value="{{ user.id }}"
+            >
+
+        </form>        
+    </main>
+{% endblock body %}

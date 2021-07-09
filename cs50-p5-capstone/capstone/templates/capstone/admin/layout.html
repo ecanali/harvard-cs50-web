@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}RecipeLib - Admin{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link href="{% static 'capstone/styles.css' %}" rel="stylesheet">
+        <link href="{% static 'capstone/assets/favicon.ico' %}" rel="icon">
+    </head>
+    <body>
+        
+        <header class="nav-admin">
+            <nav class="nav-admin">
+                <a href="{% url 'index' %}"><img src="{% static 'capstone/assets/recipelib-logo.png' %}" alt="logo-recipelib"></a>
+                
+                {% if user.is_authenticated %}
+                    <a href="{% url 'myrecipes' %}" class="active">Minhas Receitas</a>
+
+                    <form action="{% url 'logout' %}" method="post" class="logout-form">
+                        {% csrf_token %}
+                        <button class="logout-button" type="submit">Sair</button>
+                    </form>
+                {% endif %}
+            </nav>
+        </header>
+
+        <div class="content">
+
+            {% block body %}
+            {% endblock body %}
+
+        </div>
+
+        <script src="{% static 'capstone/admin.js' %}"></script>
+
+    </body>
+</html>

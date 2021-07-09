@@ -1,0 +1,68 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Listing: {{ listing.title }}</h2>
+
+    <div class="listing-page">
+        <div class="actions">
+            <a href="{% url 'watch' listing.id %}">
+                {% if watchlisted == True %}
+                    <button class="btn btn-secondary">Remove from Watchlist</button>
+                {% else %}
+                    <button class="btn btn-secondary">Add to Watchlist</button>
+                {% endif %}
+            </a>
+
+            {% if owner == True and listing.status == 'active' %}
+                <a href="{% url 'close' listing.id %}">
+                    <button class="btn btn-primary">Close</button>
+                </a>
+            {% endif %}
+
+            {% if listing.status == 'closed' %}
+                <h4>This listing is closed, the winner is the user: {{ listing.winner_id }}</h4>
+            {% endif %}
+
+            {% if winner == True %}
+                <h4>Congratulations! You won this bid!</h4>
+            {% endif %}
+        </div>
+
+        <div class="listing-page-img">
+            <img src="{{ listing.image_url }}" alt="{{ listing.title }}">
+        </div>
+
+        <div class="listing-page-info">
+            <p><strong>Description:</strong> {{ listing.description }}</p>
+            <p><strong>Current Price:</strong> ${{ listing.current_price }}</p>
+        </div>
+
+        <hr>
+        {% if listing.status == 'active' %}
+            <div class="bid">
+                <form action="{% url 'bid' listing.id %}" method="post">
+                    {% csrf_token %}
+                    {{ bid_form }}
+                    <input type="submit" value="Place Bid" class="btn btn-primary">
+                </form>
+            </div>
+
+            <hr>
+            <div class="comments-session">
+                <h4>Comments:</h4>
+                <form action="{% url 'comment' listing.id %}" method="post">
+                    {% csrf_token %}
+                    {{ comment_form }}
+                    <input type="submit" value="Post Comment" class="btn btn-primary">
+                </form>
+                <div class="comments">
+                    {% for comment in comments %}
+                        <p><strong>{{ comment.user_id }}</strong> says: {{ comment.text }}</p>
+                    {% empty %}
+                        <p>No comments yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %} 
+    </div>
+{% endblock %}

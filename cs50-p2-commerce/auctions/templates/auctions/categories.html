@@ -1,0 +1,40 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Categories</h2>
+
+    <h4>List of all listing categories:</h4>
+    <form action="{% url 'categories' %}" method="post">
+        {% csrf_token %}
+        <select name="filter" class="form-control reduced-inputs">
+            <option value="all">All</option>
+            {% for category in categories %}
+                <a href="">{{category.name}}</a>
+                {% if category.id == filter %}
+                    <option value="{{ category.id }}" selected>{{ category.name }}</option>
+                {% else %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <input type="submit" value="Filter" class="btn btn-primary">
+    </form>
+
+    <h4>All active listings in this category:</h4>
+    <div class="active-listing">
+        {% for listing in active_listing %}
+            <a href="{% url 'listing' listing.id %}">
+                <div class="listing-item">
+                    <div class="listing-img">
+                        <img src="{{ listing.image_url }}" alt="{{ listing.title }}">
+                    </div>
+                    <div class="listing-info">
+                        <h3>{{ listing.title }}</h3>
+                        <p>{{ listing.description }}</p>
+                        <p>Price: ${{ listing.current_price }}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

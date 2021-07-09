@@ -1,0 +1,62 @@
+{% extends '../layout.html' %}
+
+{% block title %}
+    RecipeLib - Admin Minhas Receitas
+{% endblock title %}
+
+{% block body %}
+    <section>
+        <div class="header-index">
+            <h2 class="h2-admin">Gerenciar minhas receitas</h2>
+            <a href="{% url 'create' %}" class="admin-button-1">Nova receita</a>
+        </div>
+
+        <div class="grid-receitas-admin">
+            {% for recipe in page_obj %}
+                <div class="receita-admin" id="{{ recipe.id }}">
+                    {% for file in files %}
+                        {% if file.recipe == recipe %}
+                            <img src="{{ file.path }}" alt="{{ recipe.title }}">
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="texto-receita-admin">
+                        <h3>{{ recipe.title }}</h3>
+                        <p>por {{ recipe.chef }}</p>
+                        <a href="{% url 'myrecipe' recipe.id %}">Visualizar</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <nav class="admin-pagination" aria-label="Recipes page navigation">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+            {% endif %}
+
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.number }}">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </a>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock body %}

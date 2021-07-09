@@ -1,0 +1,75 @@
+body {
+    padding: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+form, input {
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    display: block;
+    margin-top: 10px;
+}
+
+form.create-listing-form input[type="submit"] {
+    margin-top: 26px;
+}
+
+select {
+    padding: 5px;
+}
+
+label {
+    display: block; 
+}
+
+form.create-listing-form, .form-page {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.listing-item {
+    display: flex;
+}
+
+.listing-img {
+    margin-right: 10px;
+}
+
+img {
+    height: 100px;
+}
+
+.listing-page-img img {
+    height: 300px;
+    margin: 10px 0;
+}
+
+.reduced-inputs {
+    width: 25%;
+}
+
+.error, .success {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    list-style: none;
+}
+
+ul {
+    padding-inline-start: 0;
+}
